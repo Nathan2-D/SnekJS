@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>SNEK.js - Scroll linked effects experimentations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css'>
+    <link rel='stylesheet' href='assets/fontello.css'>
+    <link rel="stylesheet" href="../v0.0.1/css/snek.css">
+    <link rel="stylesheet" href="assets/custom.css">
+  </head>
+  <body>
+    <div class="container">
+      <section class="header">
+        <div class="s-content">
+          <div class="intro">
+            <h1>SNEK.js - <span>v0.0.1</span></h1>
+            <h2>Scroll linked effects experimentations.</h2>
+            <h2>Using CSS typed OM</h2>
+            <h3><em>(Chrome +66 only) or its regular CSSOM</em></h3>
+            <div class="links">
+              <a target="blank_" href="#"><i class="icon-github"></i></a>
+              <a target="blank_" href="https://twitter.com/_nd_dev"><i class="icon-twitter"></i></a>
+            </div>
+          </div>
+          <h2 class="scrollText">Time to scroll...</h2>
+        </div>
+      </section>
+      <section class="s-snek s-is-content s-right">
+        <div class="s-content">
+          <h1 class="caption">Hello there ! </h1>
+        </div>
+      </section>
+      <section class="s-snek s-is-content s-left">
+        <div class="s-content">
+          <h1 class="caption">Nice to meet you ;)</h1>
+        </div>
+      </section>
+      <section class="s-snek s-is-content s-middle">
+        <div class="s-content">
+          <h1 class="caption">Im snek !</h1>
+          <p>Keep scrolling and get to know me ; )</p>
+        </div>
+      </section>
+      <section class="s-snek">
+        <div class="s-content">
+          <div class="column is-10 is-offset-1">
+            <div class="tag">Snek's logic</div>
+            <div class="content">
+              <h1>What Snek do</h1>
+              <p>1 - Inject two <code>span</code> in each <em>'.s-snek'</em> root.</p>
+              <p>2 - Determine active <em>'.s-snek'</em> element* & apply 'active' class to it</p>
+              <p>3 - Find spans inside active element & apply correct width/height on it according to this logic :</p>
+              <p>The <strong>width</strong> of the first span element <strong>=</strong> the percentage of scroll performed on the first half of the active element.</p>
+              <p>The <strong>length</strong> of the second span element <strong>=</strong> the percentage of scroll performed on the second half of the active element.</p>
+              <p>Everything else is managed by the css.</p>
+              <p><em>*element become active when 'touching' the 'trigger line', in this case the line is positioned at 95% of the window<br>
+              however, you can set it where you want it to be by changing its logic eg: -> triggerLine = (windowHeight/2) and the trigger line is now at the center of the window like in <a href="triggerLineTest.html">this example</a>, triggerLine = ((windowHeight/100) * 50) result the same, if you want to use percentage to place it.</em></p>
+              <p>nb: <em>Currently, trigger line is set for the whole function, but im looking for a way to change it on selected element using data-attr, can't find a logic to implement that, currently its break everything :( , you're welcome if you have a brillant idea ;) </em></p>
+              <strong>An example will explain it better, see below</strong>
+              <em>red line represent our trigger</em>
+            </div>
+          </div>
+      </section>
+      <section class="s-snek s-red s-custom-3 s-eg">
+        <div class="s-content">
+          <div class="content has-text-centered">
+            <div id="eg">
+              <div id="eg1">We've scrolled <div id="eg1_rS"></div> / <div id="eg1_eH"></div> <strong>=</strong> <div id="eg1_r"></div>% of the first half of this element.</div>
+              <div id="eg2">We've scrolled <div id="eg2_rS"></div> / <div id="eg2_eH"></div> <strong>=</strong> <div id="eg2_r"></div>% of the second half of this element.</div>
+              <div class="line"></div>
+            </div>
+            <h3>Some fake contents</h3>
+            <div class="fc"> <p></p> <p></p> <p></p> <p></p> <hr> <div></div> <p></p> <p></p> <p></p> <p></p> <p></p> </div>
+          </div>
+        </div>
+      </section>
+       <section class="s-snek">
+        <div class="s-content">
+          <div class="column is-10 is-offset-1">
+            <div class="content">
+              <h4 class="has-text-centered">Architecture</h4>
+              <pre>
+            &#x3C;div class=&#x22;container&#x22;&#x3E;
+              &#x3C;div class=&#x22;s-snek&#x22;&#x3E;
+                &#x3C;div class=&#x22;s-content&#x22;&#x3E;&#x3C;/div&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="s-snek">
+        <div class="s-content">
+          <div class="content">
+            <div class="tag">CSS</div>
+            <div class="column is-10 is-offset-1">
+              <h3>What about the css ?</h3>
+              <h4>Css rules to respect :</h4>
+              <p><code>.s-snek</code> is <strong>always</strong> <code>.s-content</code> direct parent.</p>
+              <p>Both <code>.s-snek</code> & <code>.s-content</code> need to be in <code>position: relative;</code>.</p>
+              <p><code>.s-content</code>'s z-index need to be higher than any other element, eg : <code>z-index: 9999;</code>.</p>
+              <p><code>.s-snek>span</code>'s z-index need to be higher than any other element but less than its parent, eg : <code>z-index: 9998;</code></p>
+            </div>
+            <div class="column is-10 is-offset-1">
+              <h3>CSS's logic</h3>
+              <p>Snek.js logic's based on odd/even and use css <code>::nth-of-type(odd/even)</code> to determine which direction & side the snek will go if not specified by a class.</p>
+              <p>First snek parts will move on <strong>X axis</strong>, by increasing/decreasing its <strong>width</strong>.</p>
+              <p>Second snek parts will move on <strong>Y axis</strong>, by increasing/decreasing its <strong>height</strong>.</p>
+              <p>So :</p>
+              <h4 class="has-text-centered">Container</h4>
+              <pre>.s-snek{--blue:#1E88E5; --default-color:var(--blue); --default-size:5px; position: relative; }</pre>
+              <h4 class="has-text-centered">Content</h4>
+              <pre>
+              .s-content{z-index: 9999; position: relative; }</pre>
+              <h4 class="has-text-centered">Snek parts</h4>
+              <pre>
+              .s-snek>span:nth-of-type(even){width: var(--default-size);height: 0;}
+              .s-snek>span:nth-of-type(odd){width: 0;height: var(--default-size);}</pre>
+              <p class="strong">We also need to set origin for our snek parts, again based on their index.</p>
+              <pre>
+              .s-snek:nth-child(even)>span:nth-of-type(1){top: 0;left: 0;}
+              .s-snek:nth-child(odd)>span:nth-of-type(1){top: 0;right: 0;}
+              .s-snek:nth-child(even)>span:nth-of-type(2){top: 0;right: 0;height:0;}
+              .s-snek:nth-child(odd)>span:nth-of-type(2){top: 0;left: 0;height:0;}</pre>
+            </div>
+            <h4 class="bottom-caption">And that's it for the base Css !</h4>
+          </div>
+        </div>
+      </section>
+      <section class="s-snek s-gradient-2 s-is-full">
+        <div class="s-content">
+          <h1 class="caption custom">Lets customize it !</h1>
+        </div>
+      </section>
+       <section class="s-snek s-red">
+        <div class="s-content">
+          <div class="content">
+            <div class="tag">Colors</div>
+            <pre>
+            &#x3C;div class=&#x22;s-snek s-red&#x22;&#x3E;
+              &#x3C;div class=&#x22;s-content&#x22;&#x3E;&#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;</pre>
+            <pre>
+            .s-snek{
+              --red:#F44336;
+              --blue:#1E88E5;
+              --yellow:#FDD835;
+            }
+            .s-snek.blue>span{background:var(--blue);}
+            .s-snek.red>span{background:var(--red);}
+            .s-snek.yellow>span{background:var(--yellow);}
+            </pre>
+          </div>
+        </div>
+      </section>
+       <section class="s-snek s-is-full">
+        <div class="s-content">
+          <div class="content">
+            <div class="tag">Full size</div>
+            <pre>
+            &#x3C;div class=&#x22;s-snek s-is-full&#x22;&#x3E;
+              &#x3C;div class=&#x22;s-content&#x22;&#x3E;&#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;</pre>
+            <pre>
+            .s-snek.s-is-full>span:nth-of-type(even){width: 100%;}
+            .s-snek.s-is-full>span:nth-of-type(odd){height: 100%;}
+            </pre>
+          </div>
+        </div>
+      </section>
+       <section class="s-snek s-custom-1">
+        <div class="s-content">
+          <div class="content">
+            <div class="tag">Custom sizes</div>
+            <pre>
+            .s-snek.s-custom-1>span:nth-of-type(even){width: 42px;}
+            .s-snek.s-custom-1>span:nth-of-type(odd){height: 100px;}
+            </pre>
+          </div>
+        </div>
+      </section>
+      <section class="s-snek s-custom-2 s-left s-red">
+        <div class="s-content">
+          <div class="s-content">
+            <div class="content">
+              <div class="tag">Direction : left</div>
+              <pre>
+              .s-snek.s-left>span:nth-of-type(1){left:inherit;right: 0;}
+              .s-snek.s-left>span:nth-of-type(2){left:0;right: inherit;}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="s-snek s-custom-1 s-right s-red">
+        <div class="s-content">
+          <div class="s-content">
+            <div class="content">
+              <div class="tag">Direction : right</div>
+              <pre>
+              .s-snek.s-right>span:nth-of-type(1){right:inherit;left: 0;}
+              .s-snek.s-right>span:nth-of-type(2){right:0;left: inherit;}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="s-snek s-custom-3 s-middle s-red">
+        <div class="s-content">
+          <div class="s-content">
+            <div class="content">
+              <div class="tag">Direction : middle</div>
+              <pre>
+            <em>// Logic implemented for elements with this classes :</em>
+            <em>// Snek calculate top/right position to keep the element centered, in addition to its size.</em>
+              .s-snek.s-middle>span{top: 0;left: 0;}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </section>
+       <section class="s-snek s-custom-4 s-top s-red">
+        <div class="s-content">
+          <div class="content">
+              <div class="tag">Direction : top</div>
+              <pre>
+            <em>// only Y axis for elements with this class.</em>
+            <em>// choose side by adding '.s-left' or '.s-right", default is based on index.</em>
+              .s-snek.s-top>span:nth-of-type(1){height: 0;}
+              .s-snek.s-top>span:nth-of-type(2){height: 0;bottom: 0;top:inherit !important;}
+              </pre>
+            </div>
+        </div>
+      </section>
+     <section class="s-snek s-custom-4 s-bottom s-red">
+        <div class="s-content">
+          <div class="content">
+              <div class="tag">Direction : bottom</div>
+              <pre>
+            <em>// only Y axis for elements with this class.</em>
+            <em>// choose side by adding '.s-left' or '.s-right", default is based on index.</em>
+              .s-snek.s-bottom>span:nth-of-type(1){width: 100%;height: 0;}
+              </pre>
+            </div>
+        </div>
+      </section>
+      <section class="s-snek s-custom-3 s-left s-reverse s-red">
+        <div class="s-content">
+          <div class="content">
+              <div class="tag">Direction : left reverse</div>
+              <pre>
+              .s-snek.s-left.s-reverse>span:nth-of-type(2){right:0;left: inherit;}
+              </pre>
+            </div>
+        </div>
+      </section>
+       <section class="s-snek s-custom-3 s-right s-reverse s-red">
+        <div class="s-content">
+          <div class="content">
+              <div class="tag">Direction : right reverse</div>
+              <pre>
+              .s-snek.s-right.s-reverse>span:nth-of-type(2){left:0;right: inherit;}
+              </pre>
+            </div>
+        </div>
+      </section>
+      <section class="s-snek s-is-content s-middle">
+        <div class="s-content">
+          <div class="content">
+              <div class="tag">Snek is content</div>
+              <pre><em>// Again treatment is different here, -> the element is fully visible when user scrolled half of it.</em></pre>
+              <pre>
+            <em>// prevent content from being visible when the container has no width</em>
+              .s-snek.s-is-content{overflow: hidden;width: 0;}
+            <em>// direction : based on index</em>
+              .s-snek.s-is-content:nth-of-type(even){margin-right: auto;}
+              .s-snek.s-is-content:nth-of-type(odd){margin-left: auto;}
+            <em>// direction : based on class</em>
+              .s-snek.s-is-content.s-left{margin-left: auto;margin-right: initial;}
+              .s-snek.s-is-content.s-right{margin-right: auto;margin-left: initial;}
+              .s-snek.s-is-content.s-middle{margin-right: auto;margin-left: auto;}
+              </pre>
+            </div>
+        </div>
+      </section>
+      <section class="s-snek s-is-content s-left">
+        <div class="s-content">
+          <h1 class="caption">.s-snek.s-is-content.s-left</h1>
+        </div>
+      </section>
+      <section class="s-snek s-is-content s-right">
+        <div class="s-content">
+          <h1 class="caption">.s-snek.s-is-content.s-right</h1>
+        </div>
+      </section>
+      <section class="s-snek s-is-content s-middle">
+        <div class="s-content">
+          <h1 class="caption">.s-snek.s-is-content.s-middle</h1>
+        </div>
+      </section>
+      <section class="nuffin">
+        <h1 class="caption">Nothing on this one will not break anything.</h1>
+      </section>
+      <section class="s-snek s-is-full s-gradient-1">
+        <div class="s-content">
+          <h1 class="caption">Gradients on this one.</h1>
+        </div>
+      </section>
+      <section class="s-snek _3d s-yellow">
+        <div class="s-content">
+          <h1 class="caption">Custom style example</h1>
+        </div>
+      </section>
+      <section class="s-snek s-red s-custom-5 last">
+        <div class="s-content">
+          <h1 class="theend">The end !</h1>
+          <div class="bottom-text">
+            <p>Made with &hearts; in Belgium.</p>
+          </div>
+        </div>
+      </section>
+      <div id="toTop" class="anchor-link"></div>
+    </div>
+    <script src="assets/demo.js"></script>
+  </body>
+</html>
