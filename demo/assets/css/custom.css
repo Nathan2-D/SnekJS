@@ -135,7 +135,7 @@ p.strong{text-align: center; color:#333;}
   width: 100%;
   background:#3c3c3c;
 }
-.active #eg{display: block;}
+.s-active #eg{display: block;}
 .s-eg{height: 150vh;}
 #eg>div{
   transition: background .6s ease-in;
@@ -151,7 +151,7 @@ p.strong{text-align: center; color:#333;}
   margin: 0 auto;
 
 }
-#eg>div.active{
+#eg .active{
   background:#099;
 }
 .rS, .eH, .r, #eg>div strong{
@@ -240,7 +240,7 @@ p.strong{text-align: center; color:#333;}
   font-size:6em;
   color:#f0f0f0;
 }
-.active .bottom-text{display: block;}
+.s-active .bottom-text{display: block;}
 .bottom-text{
   display: none;
   position: fixed;

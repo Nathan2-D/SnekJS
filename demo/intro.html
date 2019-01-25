@@ -5,9 +5,9 @@
     <title>SNEK.js - Scroll linked effects experimentations</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css'>
-    <link rel='stylesheet' href='assets/fontello.css'>
-    <link rel="stylesheet" href="../v0.0.1/css/snek.css">
-    <link rel="stylesheet" href="assets/custom.css">
+    <link rel='stylesheet' href='assets/css/fontello.css'>
+    <link rel="stylesheet" href="../lib/v0.0.1/css/snek.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
   </head>
   <body>
     <div class="container">
@@ -17,9 +17,9 @@
             <h1>SNEK.js - <span>v0.0.1</span></h1>
             <h2>Scroll linked effects experimentations.</h2>
             <h2>Using CSS typed OM</h2>
-            <h3><em>(Chrome +66 only) or its regular CSSOM</em></h3>
+            <h3><em>(Chrome +66 only)</em></h3>
             <div class="links">
-              <a target="blank_" href="#"><i class="icon-github"></i></a>
+              <a target="blank_" href="https://github.com/Nathan2-D/snekJS"><i class="icon-github"></i></a>
               <a target="blank_" href="https://twitter.com/_nd_dev"><i class="icon-twitter"></i></a>
             </div>
           </div>
@@ -316,12 +316,27 @@
         <div class="s-content">
           <h1 class="theend">The end !</h1>
           <div class="bottom-text">
-            <p>Made with &hearts; in Belgium.</p>
+            <p>Made with &hearts; in Belgium. -> <a target="blank_" href="https://github.com/Nathan2-D/snekJS">git</a> - <a target="blank_" href="https://twitter.com/_nd_dev">twt</a></p>
           </div>
         </div>
       </section>
       <div id="toTop" class="anchor-link"></div>
     </div>
-    <script src="assets/demo.js"></script>
+    <script src="../lib/v0.0.1/js/snek.js"></script>
+    <script>
+      if (window.CSS && CSS.number) {
+        console.log('You are using CSS typed OM version')
+        window.addEventListener('scroll', (e) => { snekTypedOM('.container','.s-snek', 95)  }, { capture: false, passive: true})
+      }else{
+        console.log('Your browser doesnt support CSS Typed OM, please switch to Google Chrome +66 ;)')
+      }
+      //
+      document.getElementById('toTop').onclick = function(e){
+        document.getElementsByTagName('body')[0].scrollIntoView({
+          behavior : 'smooth',
+          block : 'start'
+        })
+      }
+    </script>
   </body>
 </html>
