@@ -82,3 +82,7 @@
 
 /*WIP - parallax*/
 .s-is-parallax{background-attachment: fixed;background-size: cover;background-repeat: no-repeat;}
+
+
+/*below its temporary, we shouldnt have span in element when its useless so we'll just hide it with css for now*/
+.s-snek.s-sSs-s.s-is-parallax>span{width: 0 !important;height: 0 !important;}
