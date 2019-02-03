@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>SNEK.js - Scroll linked effects experimentations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css'>
+    <link rel="stylesheet" href="../lib/v0.0.1/css/snek.css">
+    <style>
+      /*S_SNEK STYLING*/
+      .s-snek{
+        background:#f0f0f0;
+        --default-color:#171727;
+        --default-size:15px;
+      }
+      .parallax-bg-1{background-image:url(assets/img/parallax-bg-1.jpeg);}
+      .parallax-bg-2{background-image:url(assets/img/parallax-bg-2.jpeg);}
+      .parallax-bg-3{background-image:url(assets/img/parallax-bg-3.jpeg);}
+      .parallax-bg-4{background-image:url(assets/img/parallax-bg-4.jpeg);}
+      .parallax-bg-5{background-image:url(assets/img/parallax-bg-5.jpeg);}
+      .parallax-bg-6{background-image:url(assets/img/parallax-bg-6.jpeg);}
+      .parallax-bg-7{background-image:url(assets/img/parallax-bg-7.jpeg);}
+
+      /*PAGE STYLING*/
+      section{height: 100vh;border:1px dotted #e83737;}
+      section:before{content:"";display: block;width: 100%;height: 1px;border-bottom: 1px dashed #e83737;position: absolute;top: 50%;}
+      .delimiter{margin-top: .5714em;}
+      .smaller section{height:25vh;}
+      .header{position: relative;}
+      .columns{margin: 0 !important;}
+      .column{padding: 0;}
+      .line{content:"";display: block;width: 100%;position: fixed;top: 50%;height: 1px;background:red;left: 0;right: 0;}
+      .infos{
+        position: absolute;
+        right: 0;
+        background:#171727;
+        padding: 5px 12px;
+        border-bottom-left-radius: 5px;
+        text-align: center;
+        color:#bababa;
+      }
+      .s-content>h1{font-size:2em;text-align: center;line-height: 100vh;}
+      .s-is-parallax .s-content>h1{color:#fcfcfc;}
+      .infos span, .infos em, .infos p{color:#555;}
+      .scrollHint{
+        position: absolute;
+        left: calc(50% - 25px);
+        bottom: 0;
+        width: 50px;
+        height: 42px;
+      }
+      .scrollHint:before, .scrollHint:after{
+        content:"";
+        display: block;
+        position: absolute;
+        left: 50%;
+        width: 1px;
+        height: 100%;
+        background:#bbb;
+      }
+      .scrollHint:after{
+        animation:scrollHint 1s infinite;
+        height: 1%;
+        background:#7c7c7c;
+      }
+      @keyframes scrollHint{
+        from{height: 1%;}
+        to{height: 100%;}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="header">
+        <div class="infos">
+          <h1>SNEK.js - <span>v0.0.1</span></h1>
+          <h2>Scroll linked effects experimentations, using CSS typed OM</h2>
+          <h3><em>(Chrome +66 only) / regular CSSOM fallback for others (not fully cross-browser)</em></h3>
+          <h3><a target="blank_" href="https://github.com/Nathan2-D/snekJS">git</a> - <a target="blank_" href="https://twitter.com/_nd_dev">twt</a>
+          </h3>
+          <p>Feedback appreciated &hearts;</p>
+        </div>
+        <div class="scrollHint"></div>
+      </section>
+      <!-- -s-is-parallax -->
+      <div class="content has-text-centered delimiter"><h2>(WIP) parallax</h2></div>
+      <div class="columns">
+        <div class="column">
+          <section>
+            <h1>Lorem Ipsum</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi deserunt natus architecto aliquam, dolor quaerat beatae quae cupiditate quibusdam saepe, mollitia magnam maiores blanditiis distinctio voluptates labore cumque. Adipisci, expedita!</p>
+            <p>
+              <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda placeat unde officia veniam numquam aliquid animi sit fugit, quas commodi reiciendis asperiores at ab, eligendi distinctio illo deleniti dicta quod.</span>
+              <span>Architecto illo blanditiis necessitatibus nostrum. Facere dolorum labore ipsa reprehenderit, officia at. Voluptates itaque explicabo harum ipsa nihil maxime quis, impedit, fugiat culpa error, quas assumenda asperiores est. Doloribus, inventore?</span>
+              <span>Saepe laudantium eligendi iure vel vero odio ipsum sunt illo facilis ullam, repellendus qui at adipisci dicta architecto! Amet soluta maxime doloribus earum doloremque dignissimos quidem consequuntur aut inventore iusto!</span>
+              <span>Suscipit deleniti ad nesciunt aliquam, omnis ducimus, fuga nam deserunt blanditiis vel corrupti dicta enim accusantium exercitationem quam pariatur tempore soluta! Nobis ducimus animi minus assumenda tenetur. Voluptatem, eligendi, optio.</span>
+              <span>Nesciunt consequuntur possimus est eligendi itaque accusantium, quod obcaecati amet aperiam veniam, sapiente ex totam illum placeat architecto accusamus! Animi ad ratione iste repudiandae mollitia repellendus sapiente distinctio veniam ipsam.</span>
+              <span>Enim quam expedita aliquam facere officia saepe quia repellendus placeat, inventore a, fuga ut vel adipisci atque minus voluptates nisi ea non architecto alias suscipit quasi. Vel laudantium itaque nobis.</span>
+              <span>Tempora iure temporibus id provident minima voluptatem, libero error, possimus dicta magnam repudiandae veniam? Ratione suscipit iste, sapiente unde. Totam hic doloribus sed, amet incidunt quos at quasi quis porro.</span>
+              <span>Odio magni possimus dignissimos culpa dolorem esse quidem, animi ducimus ut vel nobis illum et atque delectus libero tenetur aliquam accusamus rem dolores, error corrupti eius! Ex quae soluta facilis?</span>
+              <span>Accusantium voluptate ducimus ex suscipit odio repudiandae explicabo unde amet quas quasi consequuntur, perferendis fuga eaque eum, nobis libero rem reprehenderit magnam iste optio corrupti nostrum neque ipsum asperiores! Pariatur!</span>
+              <span>Consectetur rerum fugit porro modi, odit repudiandae et adipisci atque vel natus officia provident excepturi facilis beatae architecto ut nesciunt unde commodi. Architecto autem, blanditiis tempore unde maxime vero adipisci!</span>
+              <span>Velit vero suscipit labore similique tenetur animi dolore inventore sunt quibusdam earum facilis placeat eum recusandae, veniam esse quod quos, expedita laborum fuga. Possimus labore, vel nam sit? Eum, omnis.</span>
+              <span>Dicta labore quod debitis quae quibusdam dolorum obcaecati eos unde deleniti perferendis velit odio sunt rerum, maiores fugit aliquam eum itaque repellendus, natus error! Ipsam rerum omnis, mollitia itaque illum.</span>
+            </p>
+          </section>
+        </div>
+        <div class="column">
+          <section class="s-snek s-is-parallax parallax-bg-2"><div class="s-content"><h1>.s-snek.s-is-parallax</h1></div></section>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <section class="s-snek s-is-parallax parallax-bg-3"><div class="s-content"><h1>.s-snek.s-is-parallax</h1></div></section>
+        </div>
+        <div class="column">
+          <section class="s-snek s-is-parallax parallax-bg-4"><div class="s-content"><h1>.s-snek.s-is-parallax</h1></div></section>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <section class="s-snek s-is-parallax parallax-bg-5"><div class="s-content"><h1>.s-snek.s-is-parallax</h1></div></section>
+        </div>
+        <div class="column">
+          <section class="s-snek s-is-parallax parallax-bg-6"><div class="s-content"><h1>.s-snek.s-is-parallax</h1></div></section>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <section class="s-snek s-is-parallax parallax-bg-7"><div class="s-content"><h1>.s-snek.s-is-parallax</h1></div></section>
+        </div>
+      </div>
+      <!-- -s-is-parallax -->
+      <div class="content has-text-centered delimiter"><h2>(WIP) parallax with direction</h2></div>
+      <div class="columns">
+        <div class="column">
+          <section class="s-snek s-is-parallax s-left parallax-bg-1"><div class="s-content"><h1>.s-snek.s-is-parallax.s-left</h1></div></section>
+        </div>
+        <div class="column">
+          <section class="s-snek s-is-parallax s-right parallax-bg-2"><div class="s-content"><h1>.s-snek.s-is-parallax.s-right</h1></div></section>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <section class="s-snek s-is-parallax s-left parallax-bg-3"><div class="s-content"><h1>.s-snek.s-is-parallax.s-left</h1></div></section>
+        </div>
+        <div class="column">
+          <section class="s-snek s-is-parallax s-right parallax-bg-4"><div class="s-content"><h1>.s-snek.s-is-parallax.s-right</h1></div></section>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <section class="s-snek s-is-parallax s-left parallax-bg-5"><div class="s-content"><h1>.s-snek.s-is-parallax.s-left</h1></div></section>
+        </div>
+        <div class="column">
+          <section class="s-snek s-is-parallax s-right parallax-bg-6"><div class="s-content"><h1>.s-snek.s-is-parallax.s-right</h1></div></section>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <section class="s-snek s-is-parallax s-left parallax-bg-7"><div class="s-content"><h1>.s-snek.s-is-parallax.s-left</h1></div></section>
+        </div>
+      </div>
+      <section>
+      </section>
+      <div class="line"></div>
+    </div>
+    <script src="../lib/v0.0.1/js/snek.js"></script>
+    <script>
+      if (window.CSS && CSS.number) {
+        console.log('You are using CSS typed OM version')
+        window.addEventListener('scroll', (e) => { snekTypedOM('.container','.s-snek')  }, { capture: false, passive: true})
+      }else{
+        window.alert('Your browser doesnt support CSS Typed OM, please switch to Google Chrome +66 ;)')
+      }
+    </script>
+  </body>
+</html>
